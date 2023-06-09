@@ -1,0 +1,80 @@
+#kivy 1.0
+# Filename: my.kv
+#: import icon kivysome.icon
+
+Main:
+    SplashScreen:  #this should be in first plae
+    Home: 
+    ImageGen:
+    PassGen:
+
+# splash screen 
+<SplashScreen>:
+    name : "Loading"
+    Image:
+        source: "logo.png" 
+        size_hint : 0.4, 0.4
+        pos_hint : {"center_x" : 0.5, "center_y" : 0.5}
+
+# home menu
+<Home>:
+    name : "Home"
+    GridLayout:
+        cols:1
+        spacing : 10
+        padding:30
+        
+        Button : 
+            text:"Image" 
+            size_hint: 0.2, 0.2
+            on_press : 
+                # root.fun()
+                app.root.current = "Image"
+                root.manager.transition.direction = "left"
+
+        Button : 
+            text : "Text"
+            size_hint: 0.2,0.2
+        Button : 
+            text : "Pass"
+            size_hint: 0.2,0.2
+            on_press : 
+                root.fun()
+                app.root.current = "Random"
+                root.manager.transition.direction = "left"
+
+# this is for canvas
+<ImageGen>:
+    name : "Image"
+    Label :
+        text: 'ok'
+
+
+
+# idk lol
+<PassGen>:
+    name : "Random"
+
+    GridLayout:
+        rows:3
+        spacing : 10
+        padding:30
+
+        Label:
+            id: label1
+            text: root.text1
+
+        Button:
+            markup: True
+            text: "hello"
+            size_hint: 0.2, 0.2
+            on_press:
+                root.generator()
+ 
+        Button : 
+            text : "Back"
+            size_hint: 0.2,0.2
+            pos_hint: { 'center_x' : 0.2, 'center_y' : 0.2}
+            on_press : 
+                app.root.current = "Home"
+                root.manager.transition.direction = "left"
